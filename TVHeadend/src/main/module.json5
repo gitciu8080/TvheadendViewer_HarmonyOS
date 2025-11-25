@@ -1,0 +1,53 @@
+{
+  "module": {
+    "name": "TVHeadend",
+    "type": "entry",
+    "description": "$string:module_desc",
+    "mainElement": "TVHeadendAbility",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "abilities": [
+      {
+        "name": "TVHeadendAbility",
+        "srcEntry": "./ets/tvheadendability/TVHeadendAbility.ets",
+        "description": "$string:TVHeadendAbility_desc",
+        "icon": "$media:layered_image",
+        "label": "$string:TVHeadendAbility_label",
+        "startWindowIcon": "$media:startIcon",
+        "startWindowBackground": "$color:start_window_background",
+        "exported": true,
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "ohos.want.action.home"
+            ]
+          }
+        ]
+      }
+    ],
+    "extensionAbilities": [
+      {
+        "name": "TVHeadendBackupAbility",
+        "srcEntry": "./ets/tvheadendbackupability/TVHeadendBackupAbility.ets",
+        "type": "backup",
+        "exported": false,
+        "metadata": [
+          {
+            "name": "ohos.extension.backup",
+            "resource": "$profile:backup_config"
+          }
+        ],
+      }
+    ],"requestPermissions": [
+      {"name": "ohos.permission.INTERNET"}
+    ]
+  }
+}

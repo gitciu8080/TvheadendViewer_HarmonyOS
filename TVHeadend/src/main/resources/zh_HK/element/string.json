@@ -1,0 +1,76 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "TVHeadendAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "TVHeadendAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "app_name",
+      "value": "TvhViewer"
+    },
+    {
+      "name": "yes",
+      "value": "確定"
+    },
+    {
+      "name": "no",
+      "value": "取消"
+    },
+    {
+      "name":"Multilingual",
+      "value": "多語言"
+    },
+    {
+      "name": "PG",
+      "value": "PG"
+    },
+    {
+      "name": "Not_started",
+      "value": "未開始"
+    },
+    {
+      "name": "CopyLink",
+      "value": "複製連結"
+    },
+    {
+      "name": "AutoRec",
+      "value": "自動錄製"
+    },
+    {
+      "name": "Rec",
+      "value": "錄製"
+    },
+    {
+      "name": "Play",
+      "value": "播放"
+    },
+    {
+      "name": "Book",
+      "value": "預約"
+    },
+    {
+      "name": "AdvancedRec",
+      "value": "高級自動錄製"
+    },
+    {
+      "name": "AdvancedRecDetailed",
+      "value": "節目名模糊搜尋、日期設定等等"
+    },
+    {
+      "name": "AutoRecDetailed",
+      "value": "根據節目EventID提交自動錄製"
+    },
+    {
+      "name": "ChooseRecMode",
+      "value": "選擇自動錄製模式"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "TVHeadendAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "TVHeadendAbility_label",
+      "value": "TVHviewer"
+    },
+    {
+      "name": "app_name",
+      "value": "TvhViewer"
+    },
+    {
+      "name": "yes",
+      "value": "确定"
+    },
+    {
+      "name": "no",
+      "value": "取消"
+    },
+    {
+      "name":"Multilingual",
+      "value": "多语言"
+    },
+    {
+      "name": "PG",
+      "value": "PG"
+    },
+    {
+      "name": "Not_started",
+      "value": "未开始"
+    },
+    {
+      "name": "CopyLink",
+      "value": "复制链接"
+    },
+    {
+      "name": "AutoRec",
+      "value": "自动录制"
+    },
+    {
+      "name": "Rec",
+      "value": "录制"
+    },
+    {
+      "name": "Play",
+      "value": "播放"
+    },
+    {
+      "name": "Book",
+      "value": "预约"
+    },
+    {
+      "name": "AdvancedRec",
+      "value": "高级自动录制"
+    },
+    {
+      "name": "AdvancedRecDetailed",
+      "value": "节目名模糊搜索、日期设置等等"
+    },
+    {
+      "name": "AutoRecDetailed",
+      "value": "根据节目EventID提交自动录制"
+    },
+    {
+      "name": "ChooseRecMode",
+      "value": "选择自动录制模式"
+    },
+    {
+      "name": "EPG",
+      "value": "节目表"
+    },
+    {
+      "name": "DVR",
+      "value": "录像机"
+    },
+    {
+      "name": "setting",
+      "value": "设置"
+    },
+    {
+      "name": "title",
+      "value": "标题"
+    },
+    {
+      "name": "Date",
+      "value": "日期"
+    },
+    {
+      "name": "week",
+      "value": "周期"
+    },
+    {
+      "name": "MaxRecCount",
+      "value": "最大录制数"
+    },
+    {
+      "name": "FuzzySearch",
+      "value": "模糊搜索"
+    },
+    {
+      "name": "None_EPG",
+      "value": "没有节目信息"
+    }
+  ]
+}

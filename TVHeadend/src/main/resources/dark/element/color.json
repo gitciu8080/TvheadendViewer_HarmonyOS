@@ -1,0 +1,44 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#000000"
+    },
+    { "name": "white", "value": "#000000" },
+    { "name": "black", "value": "#ffffff" },
+
+    { "name": "paper", "value": "#ffffff" },
+    { "name": "default_bg", "value": "#000" },
+    { "name": "primary_main", "value": "#54b6f2" },
+    { "name": "primary_light", "value": "#76afff" },
+    { "name": "primary_dark", "value": "#21528d" },
+    { "name": "primary_contrast", "value": "#ffffff" },
+
+    { "name": "secondary_main", "value": "#ea8632" },
+    { "name": "secondary_light", "value": "#ffac4f" },
+    { "name": "secondary_dark", "value": "#cc893f" },
+    { "name": "secondary_contrast", "value": "#ffffff" },
+
+    { "name": "error_main", "value": "#f44336" },
+    { "name": "error_light", "value": "#e57373" },
+    { "name": "error_dark", "value": "#d32f2f" },
+    { "name": "error_contrast", "value": "#ffffff" },
+
+    { "name": "text_primary", "value": "#de000000" },
+    { "name": "text_secondary", "value": "#8a000000" },
+    { "name": "text_disabled", "value": "#61000000" },
+    { "name": "text_hint", "value": "#61000000" },
+    {
+      "name": "gray",
+      "value": "#fff"
+    },
+    {
+      "name": "grayact",
+      "value": "#fff"
+    },
+    {
+      "name": "background_sec",
+      "value": "#FF161616"
+    }
+  ]
+}
