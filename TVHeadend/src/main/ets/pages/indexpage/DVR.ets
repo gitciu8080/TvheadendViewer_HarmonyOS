@@ -157,7 +157,7 @@ export struct DVR{
             }.margin({top:5,bottom:5}).width('100%').padding({left:12,right:12})
           })
         }
-      }.sticky(StickyStyle.Header)
+      }.sticky(StickyStyle.Header).backgroundColor($r('app.color.background_sec')).padding({top:10}).borderRadius(10)
     }.onRefreshing(()=>{this.RefreshDVR(mode)})
   }
   build() {
@@ -177,6 +177,6 @@ export struct DVR{
         }.tabBar(this.channel_bar('已删除',3))
       }.onChange((idx: number) => this.currentDVRTabIndex = idx)
 
-    }.justifyContent(FlexAlign.Center)
+    }.justifyContent(FlexAlign.Center).backgroundColor($r('app.color.white'))
   }
 }

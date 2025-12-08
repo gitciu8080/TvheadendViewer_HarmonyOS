@@ -164,7 +164,7 @@ export struct EPG{
                     }
 
                   })
-                }.sticky(StickyStyle.Header).width('100%').layoutWeight(1)
+                }.sticky(StickyStyle.Header).width('100%').layoutWeight(1).backgroundColor($r('app.color.background_sec')).borderRadius(10)
                 .onScrollIndex((start: number, end: number) => {
                   // 可以在这里实现滚动加载更多数据的逻辑
                 })
@@ -183,6 +183,7 @@ export struct EPG{
           }, (channel: Channels) => channel.key)
         }
         .animationMode(AnimationMode.CONTENT_FIRST_WITH_JUMP)
+        .backgroundColor($r("app.color.white"))
         .pageFlipMode(PageFlipMode.SINGLE)
         .width('100%')
         .barMode(BarMode.Scrollable)

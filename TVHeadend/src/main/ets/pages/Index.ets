@@ -1,8 +1,9 @@
 import {EPG} from "./indexpage/EPG"
 import {DVR} from "./indexpage/DVR"
 import {Home} from "./indexpage/Home"
-// import {Doc} from "./indexpage/Doc"
+import {TV} from "./indexpage/WatchTV"
 import {setting} from "./indexpage/Setting"
+import { TextSystem } from "../view/style";
 
 @Entry
 @Component
@@ -20,21 +21,23 @@ struct MainPage {
 
   build() {
       Column(){
+        Row(){TextSystem({level:1,text:'Tvheadend',txtalign:TextAlign.Center,bold:FontWeight.Bold})} // 标题
         Tabs({barPosition:BarPosition.End,index:2}){
           TabContent(){
-            EPG()
+            EPG().backgroundColor($r('app.color.background_sec')).width("100%")
           }.tabBar('EPG')
           TabContent(){
-            DVR()
+            DVR().backgroundColor($r('app.color.background_sec')).width("100%")
           }.tabBar('DVR')
           TabContent(){
-            Home()
+            Home().backgroundColor($r('app.color.background_sec')).width("100%")
           }.tabBar('首页')
           TabContent(){
+              TV().backgroundColor($r('app.color.background_sec')).width("100%")
           }.tabBar('看电视')
           TabContent(){
-            setting()
-          }.tabBar('设置')
+            setting().backgroundColor($r('app.color.background_sec')).width("100%")
+          }.tabBar('设置').backgroundColor($r('app.color.background_sec')).width("100%")
         }.animationDuration(300).height('100%').onChange((idx: number) => this.currentTabIndex = idx)
       }.height('100%')
     }
