@@ -10,7 +10,7 @@
     },
     {
       "name": "TVHeadendAbility_label",
-      "value": "label"
+      "value": "TVHviewer"
     },
     {
       "name": "app_name",
@@ -71,6 +71,38 @@
     {
       "name": "ChooseRecMode",
       "value": "選擇自動錄製模式"
+    },
+    {
+      "name": "EPG",
+      "value": "EPG"
+    },
+    {
+      "name": "DVR",
+      "value": "DVR"
+    },
+    {
+      "name": "setting",
+      "value": "设定"
+    },
+    {
+      "name": "title",
+      "value": "标题"
+    },
+    {
+      "name": "Date",
+      "value": "日期"
+    },
+    {
+      "name": "week",
+      "value": "周期"
+    },
+    {
+      "name": "MaxRecCount",
+      "value": "最大录制数"
+    },
+    {
+      "name": "FuzzySearch",
+      "value": "模糊搜索"
     }
   ]
 }

@@ -21,7 +21,8 @@ interface SelectListItem {
 struct Configuration {
   private prefName = 'tvheadend_config';
   private context = getContext(this);
-  @State listData:ConfigurationPage[]=[{title:'服务器地址/域名',LeiXin:0,placeholder:'192.168.0.1',id:'server'},
+  @State listData:ConfigurationPage[]=[
+    {title:'服务器地址/域名',LeiXin:0,placeholder:'192.168.0.1',id:'server'},
     {title:'用户名',LeiXin:0,placeholder:'admin',id:'username'},
     {title:'密码',LeiXin:0,placeholder:'admin',id:'password'},
     {title:'端口号',LeiXin:0,placeholder:'9981',id:'port'},

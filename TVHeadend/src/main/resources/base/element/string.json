@@ -25,7 +25,7 @@
       "value": "取消"
     },
     {
-      "name":"Multilingual",
+      "name": "Multilingual",
       "value": "多语言"
     },
     {
@@ -107,6 +107,14 @@
     {
       "name": "None_EPG",
       "value": "没有节目信息"
+    },
+    {
+      "name": "Storage_desc",
+      "value": "description"
+    },
+    {
+      "name": "Storage_label",
+      "value": "label"
     }
   ]
 }

@@ -4,6 +4,7 @@
     "pages/TVHSConfig",
     "pages/IJKConfig",
     "pages/ForwardME",
-    "pages/One_USE"
+    "pages/One_USE",
+    "tools/Storage"
   ]
 }

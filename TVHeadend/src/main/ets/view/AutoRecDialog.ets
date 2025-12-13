@@ -88,20 +88,27 @@ export struct SimpleDialog {
           // }.buttonStyle(ButtonStyleMode.NORMAL)
         }.selected(this.selectedOption=== false).margin(5).border({radius:30}).padding(10)
         // .onSelect(() => {this.selectedOption='AutoRec'})
-        ListItem(){
-          Row(){
-            Radio({ value: 'AdvancedRec', group: 'radioGroup'}).checked(this.selectedOption===true).onChange(()=>{this.selectedOption=true})
-              .radioStyle({
-                checkedBackgroundColor:$r('app.color.primary_main')
-              }).height('30vp').margin({right:10})
 
-            Column(){
-              TextSystem({text:$r('app.string.AdvancedRec'),level:2})
-              TextSystem({text:$r('app.string.AdvancedRecDetailed'),level:3})
-            }.justifyContent(FlexAlign.Start)
-          }.width('100%')
-          // Button({type: ButtonType.Capsule}){}.buttonStyle(ButtonStyleMode.NORMAL)
-        }.selected(this.selectedOption=== true).margin(5).border({radius:30}).padding(10)
+
+
+        // ListItem(){
+        //   Row(){
+        //     Radio({ value: 'AdvancedRec', group: 'radioGroup'}).checked(this.selectedOption===true).onChange(()=>{this.selectedOption=true})
+        //       .radioStyle({
+        //         checkedBackgroundColor:$r('app.color.primary_main')
+        //       }).height('30vp').margin({right:10})
+        //
+        //     Column(){
+        //       TextSystem({text:$r('app.string.AdvancedRec'),level:2})
+        //       TextSystem({text:$r('app.string.AdvancedRecDetailed'),level:3})
+        //     }.justifyContent(FlexAlign.Start)
+        //   }.width('100%')
+        //   // Button({type: ButtonType.Capsule}){}.buttonStyle(ButtonStyleMode.NORMAL)
+        // }.selected(this.selectedOption=== true).margin(5).border({radius:30}).padding(10)
+
+
+
+
         // .onSelect(() => {this.selectedOption='AdvancedRec'})
       }.width('95%').alignListItem(ListItemAlign.Center).margin({bottom: 10})
       if (this.selectedOption){

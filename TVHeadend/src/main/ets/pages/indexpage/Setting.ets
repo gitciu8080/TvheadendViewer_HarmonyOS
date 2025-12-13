@@ -13,7 +13,9 @@ export struct setting{
   }
   private settinglist:Array<object>=[
     new Settings('TVH设置', $r('app.media.ic_public_settings'), 'TVHSConfig'),
-    new Settings("播放器设置", $r('app.media.ic_public_settings'), 'IJKConfig')
+    new Settings('关于我', $r('app.media.ic_public_settings'), 'DVRConfig'),
+    // ,
+    // new Settings("播放器设置", $r('app.media.ic_public_settings'), 'IJKConfig')
 
   ]
   build() {

@@ -157,7 +157,7 @@ export struct DVR{
             }.margin({top:5,bottom:5}).width('100%').padding({left:12,right:12})
           })
         }
-      }.sticky(StickyStyle.Header).backgroundColor($r('app.color.background_sec')).padding({top:10}).borderRadius(10)
+      }.sticky(StickyStyle.Header).backgroundColor($r('app.color.background_sec')).padding({top:10}).borderRadius(10).height('100%')
     }.onRefreshing(()=>{this.RefreshDVR(mode)})
   }
   build() {
