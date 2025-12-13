@@ -115,6 +115,10 @@
     {
       "name": "Storage_label",
       "value": "label"
+    },
+    {
+      "name": "forwardME",
+      "value": "关于我的"
     }
   ]
 }

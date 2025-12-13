@@ -5,6 +5,8 @@
     "pages/IJKConfig",
     "pages/ForwardME",
     "pages/One_USE",
-    "tools/Storage"
+    "tools/Storage",
+    "pages/ForwardTVH",
+    "pages/UpdateInFuture"
   ]
 }
