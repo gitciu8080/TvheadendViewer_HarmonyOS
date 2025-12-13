@@ -21,7 +21,6 @@ struct MainPage {
 
   build() {
       Column(){
-        Row(){TextSystem({level:1,text:'Tvheadend',txtalign:TextAlign.Center,bold:FontWeight.Bold})} // 标题
         Tabs({barPosition:BarPosition.End,index:2}){
           TabContent(){
             EPG().backgroundColor($r('app.color.background_sec')).width("100%")
@@ -37,8 +36,8 @@ struct MainPage {
           }.tabBar('看电视')
           TabContent(){
             setting().backgroundColor($r('app.color.background_sec')).width("100%")
-          }.tabBar('设置').backgroundColor($r('app.color.background_sec')).width("100%")
-        }.animationDuration(300).height('100%').onChange((idx: number) => this.currentTabIndex = idx)
+          }.tabBar('设置')
+        }.animationDuration(300).onChange((idx: number) => this.currentTabIndex = idx)
       }.height('100%')
     }
 
