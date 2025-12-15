@@ -1,8 +1,10 @@
 import {Channels,EpgGroup} from '../../model/InterFace'
 import { getChannel, getEPG,EpgEvent} from '../../tools/get_epg';
 import {CustomDialogUser}from "../../view/AutoRecDialogExport"
-import {TitleStyle} from "../../view/style"
+import { TextSystem, TitleStyle} from "../../view/style"
 import {Rec_TV}from "../../tools/buttom_Action"
+import { Loading } from '../../view/Loading';
+
 const EMPTY_EPG: EpgGroup[] = [
   {
     // 当天日期，格式保持与你接口一致：yyyy-MM-dd
@@ -116,89 +118,97 @@ export struct EPG{
 
   build() {
     Column(){
-      Column() {
-        Tabs({ barPosition: BarPosition.Start, index: this.currentIndex }) {
-          ForEach(this.channels, (channel: Channels, index: number) => {
-            TabContent() {
-              Refresh({refreshing:this.isRefreshing})
-              {
-                List() {
-                  ForEach(this.epgMap.get(channel.key) || [], (epgGroup: EpgGroup) => {
-                    ListItemGroup({ header: this.itemHead(epgGroup.date)}){
-                      ForEach(epgGroup.EpgEvent, (epgItem: EpgEvent) => {
-                        ListItem() {
-                          Column() {
-                            Row(){TitleStyle({text:epgItem.title,level:1})
-                              if (epgItem.Multi_language===true && epgItem.PG===true) {
-                                TitleStyle({text:`${$r('app.string.Multilingual')}${$r('app.string.PG')}`,level:4})
-                              }else if (epgItem.Multi_language===true){
-                                TitleStyle({text:$r('app.string.Multilingual'),level:4})
-                              }if (epgItem.PG===true){
-                                TitleStyle({text:$r('app.string.PG'),level:4})
+      Row(){
+        TextSystem({text:$r('app.string.EPG'),level:1,bold:FontWeight.Bold,txtalign:TextAlign.Center}).margin({top:5,bottom:5}).width('100%')
+      }.backgroundColor($r('app.color.white'))
+      if (this.channels.length > 0){
+        Column() {
+          Tabs({ barPosition: BarPosition.Start, index: this.currentIndex }) {
+            ForEach(this.channels, (channel: Channels, index: number) => {
+              TabContent() {
+                Refresh({refreshing:this.isRefreshing})
+                {
+                  List() {
+                    ForEach(this.epgMap.get(channel.key) || [], (epgGroup: EpgGroup) => {
+                      ListItemGroup({ header: this.itemHead(epgGroup.date)}){
+                        ForEach(epgGroup.EpgEvent, (epgItem: EpgEvent) => {
+                          ListItem() {
+                            Column() {
+                              Row(){TitleStyle({text:epgItem.title,level:1})
+                                if (epgItem.Multi_language===true && epgItem.PG===true) {
+                                  TitleStyle({text:`${$r('app.string.Multilingual')}${$r('app.string.PG')}`,level:4})
+                                }else if (epgItem.Multi_language===true){
+                                  TitleStyle({text:$r('app.string.Multilingual'),level:4})
+                                }if (epgItem.PG===true){
+                                  TitleStyle({text:$r('app.string.PG'),level:4})
+                                }
+                                else {
+                                  Text('')
+                                }
+                              }.width('100%')
+                              TitleStyle({text:(`${this.formatTime(epgItem.start)} - ${this.formatTime(epgItem.stop)}`),level:3})
+                              TitleStyle({text:epgItem.summary,level:3})
+                              if (epgItem.progress===0) {
+                                TitleStyle({text:$r('app.string.Not_started'),level:2})
+                              }else {
+                                Progress({value: epgItem.progress,total: 100,type:ProgressType.Linear}).margin({top:5}).color($r('app.color.primary_main'))
                               }
-                              else {
-                                Text('')
+                              // EPGBtnBuilder({eventId:epgItem.event_id,title:epgItem.title,Manual_Rec:async () => {Rec_TV(epgItem.event_id,epgItem.title)},Book:this.qidai})
+                              if (epgItem.title==='暂无节目信息') {
+
+                              }else {
+                                CustomDialogUser({eventId:epgItem.event_id,title:epgItem.title,Manual_Rec:async () => {Rec_TV(epgItem.event_id,epgItem.title)},Book:this.qidai})
                               }
-                            }.width('100%')
-                            TitleStyle({text:(`${this.formatTime(epgItem.start)} - ${this.formatTime(epgItem.stop)}`),level:3})
-                            TitleStyle({text:epgItem.summary,level:3})
-                            if (epgItem.progress===0) {
-                              TitleStyle({text:$r('app.string.Not_started'),level:2})
-                            }else {
-                              Progress({value: epgItem.progress,total: 100,type:ProgressType.Linear}).margin({top:5}).color($r('app.color.primary_main'))
                             }
-                            // EPGBtnBuilder({eventId:epgItem.event_id,title:epgItem.title,Manual_Rec:async () => {Rec_TV(epgItem.event_id,epgItem.title)},Book:this.qidai})
-                            if (epgItem.title==='暂无节目信息') {
+                            .padding(12)
+                            .justifyContent(FlexAlign.Center)
+                            .backgroundColor($r('app.color.text_hint'))
+                            .borderRadius(10)
+                            .margin({top:5})
+                            .width('95%');
+                          }.width('100%').margin({top:5,bottom:5})})
+                      }
 
-                            }else {
-                              CustomDialogUser({eventId:epgItem.event_id,title:epgItem.title,Manual_Rec:async () => {Rec_TV(epgItem.event_id,epgItem.title)},Book:this.qidai})
-                            }
-                          }
-                          .padding(12)
-                          .justifyContent(FlexAlign.Center)
-                          .backgroundColor($r('app.color.text_hint'))
-                          .borderRadius(10)
-                          .margin({top:5})
-                          .width('95%');
-                        }.width('100%').margin({top:5,bottom:5})})
-                    }
-
+                    })
+                  }.sticky(StickyStyle.Header).width('100%').layoutWeight(1).backgroundColor($r('app.color.background_sec')).borderRadius(10)
+                  .onScrollIndex((start: number, end: number) => {
+                    // 可以在这里实现滚动加载更多数据的逻辑
                   })
-                }.sticky(StickyStyle.Header).width('100%').layoutWeight(1).backgroundColor($r('app.color.background_sec')).borderRadius(10)
-                .onScrollIndex((start: number, end: number) => {
-                  // 可以在这里实现滚动加载更多数据的逻辑
+                  .onDidScroll(() => {
+                    // 滚动时可以加载更多数据
+                  })
+                }.onRefreshing(() =>{
+                  this.onRefresh(this.channels[index].key);
                 })
-                .onDidScroll(() => {
-                  // 滚动时可以加载更多数据
-                })
-              }.onRefreshing(() =>{
-                this.onRefresh(this.channels[index].key);
-              })
-            }
-            // .onClick(()=>{this.IndexClick= index})
-            .backgroundColor($r('app.color.background_sec'))
-            .tabBar(this.channel_bar(channel.val,index))
+              }
+              // .onClick(()=>{this.IndexClick= index})
+              .backgroundColor($r('app.color.background_sec'))
+              .tabBar(this.channel_bar(channel.val,index))
 
 
-          }, (channel: Channels) => channel.key)
-        }
-        .animationMode(AnimationMode.CONTENT_FIRST_WITH_JUMP)
-        .backgroundColor($r("app.color.white"))
-        .pageFlipMode(PageFlipMode.SINGLE)
-        .width('100%')
-        .barMode(BarMode.Scrollable)
-        .onChange((index: number) => {
-          if (index < this.channels.length) {
-            this.currentIndex = index;
-            this.tvindex=index
-            const channelKey = this.channels[index].key;
-            this.selectedChannelKey = channelKey;
-            // 当切换标签页时，加载对应频道的 EPG 数据
-            this.loadEPGForChannel(channelKey);
+            }, (channel: Channels) => channel.key)
           }
-        })
+          .animationMode(AnimationMode.CONTENT_FIRST_WITH_JUMP)
+          .backgroundColor($r("app.color.white"))
+          .pageFlipMode(PageFlipMode.SINGLE)
+          .width('100%')
+          .barMode(BarMode.Scrollable)
+          .onChange((index: number) => {
+            if (index < this.channels.length) {
+              this.currentIndex = index;
+              this.tvindex=index
+              const channelKey = this.channels[index].key;
+              this.selectedChannelKey = channelKey;
+              // 当切换标签页时，加载对应频道的 EPG 数据
+              this.loadEPGForChannel(channelKey);
+            }
+          })
+        }
+        .layoutWeight(1)
+      }else {
+        Loading({countdown:5})
       }
-      .layoutWeight(1)
+
     }
   }
 }

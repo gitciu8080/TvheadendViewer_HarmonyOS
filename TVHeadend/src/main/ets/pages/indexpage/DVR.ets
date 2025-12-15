@@ -1,10 +1,11 @@
 import {get_dvr,get_DVR_profile,DvrConfigGridResponse,DvrProfile} from '../../tools/get_DVR'
 import {DvrListItem,DVRtab} from '../../model/InterFace'
-import {TitleStyle} from "../../view/style"
+import { TextSystem, TitleStyle} from "../../view/style"
 import {DVRBtnBuilder} from "../../tools/ButtomBuilder"
 import { readPreferences } from '../../tools/get_epg';
 import pasteboard from '@ohos.pasteboard';
 import promptAction from '@ohos.promptAction';
+import { Loading } from '../../view/Loading';
 
 @Entry
 @Component
@@ -162,21 +163,32 @@ export struct DVR{
   }
   build() {
     Column(){
-      Tabs({ barPosition: BarPosition.Start }){
-        TabContent(){
-          this.DVRBuilder(true,0)
-        }.tabBar(this.channel_bar('完成',0))
-        TabContent(){
-          this.DVRBuilder(false,1)
-        }.tabBar(this.channel_bar('预约',1))
-        TabContent(){
-          this.DVRBuilder(false,2)
-        }.tabBar(this.channel_bar('错误',2))
-        TabContent(){
-          this.DVRBuilder(false,3)
-        }.tabBar(this.channel_bar('已删除',3))
-      }.onChange((idx: number) => this.currentDVRTabIndex = idx)
+      Row(){
+        TextSystem({text:$r("app.string.DVR"),level:1,bold:FontWeight.Bold,txtalign:TextAlign.Center}).margin({top:5,bottom:5}).width('100%')
+      }.backgroundColor($r('app.color.white'))
+      Column() {
+        if (this.DVR.length > 0) {
+          Tabs({ barPosition: BarPosition.Start }) {
+            TabContent() {
+              this.DVRBuilder(true, 0)
+            }.tabBar(this.channel_bar('完成', 0))
 
+            TabContent() {
+              this.DVRBuilder(false, 1)
+            }.tabBar(this.channel_bar('预约', 1))
+
+            TabContent() {
+              this.DVRBuilder(false, 2)
+            }.tabBar(this.channel_bar('错误', 2))
+
+            TabContent() {
+              this.DVRBuilder(false, 3)
+            }.tabBar(this.channel_bar('已删除', 3))
+          }.onChange((idx: number) => this.currentDVRTabIndex = idx)
+        } else {
+          Loading({ countdown: 5 })
+        }
+      }
     }.justifyContent(FlexAlign.Center).backgroundColor($r('app.color.white'))
   }
 }

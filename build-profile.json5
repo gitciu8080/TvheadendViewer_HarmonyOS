@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "C:\\Users\\gitci\\.ohos\\config\\default_TvheadendViewer_HarmonyOS2_7LHX3XnDYE3bumwutINOPaZAITUgWWk3MpwmrwnT8Mg=.cer",
+          "certpath": "C:\\Users\\gitci\\.ohos\\config\\default_TvheadendViewer_HarmonyOS_r0CnGPEprvvyNVkSSO62ksuUHGMs-BKFGYf0lvv2Jm8=.cer",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001B25B45DACC2BAB91A315B23D56A99B2F11DCBD4EB996CA8DA59CE0BE6F1A7F8061343CC1208241D",
-          "profile": "C:\\Users\\gitci\\.ohos\\config\\default_TvheadendViewer_HarmonyOS2_7LHX3XnDYE3bumwutINOPaZAITUgWWk3MpwmrwnT8Mg=.p7b",
+          "keyPassword": "0000001BD066DE692A380E1E83FE1763812B774976DDCC351ED2FB2E85E6874CFAF940F6CAD9964D165969",
+          "profile": "C:\\Users\\gitci\\.ohos\\config\\default_TvheadendViewer_HarmonyOS_r0CnGPEprvvyNVkSSO62ksuUHGMs-BKFGYf0lvv2Jm8=.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\gitci\\.ohos\\config\\default_TvheadendViewer_HarmonyOS2_7LHX3XnDYE3bumwutINOPaZAITUgWWk3MpwmrwnT8Mg=.p12",
-          "storePassword": "0000001BB541791EAEF24C259856EB98ED43B8FE8CBD5544FDB794C2B1F2ECE4AA71F52309B3D168925625"
+          "storeFile": "C:\\Users\\gitci\\.ohos\\config\\default_TvheadendViewer_HarmonyOS_r0CnGPEprvvyNVkSSO62ksuUHGMs-BKFGYf0lvv2Jm8=.p12",
+          "storePassword": "0000001B9C7F664FF581F559A26C45A8431E11B205E6E6660D18CC5E1CC5537204F612FDD6FA751AA6015C"
         }
       }
     ],

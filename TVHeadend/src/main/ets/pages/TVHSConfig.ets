@@ -5,6 +5,7 @@ import { http } from '@kit.NetworkKit';
 import { promptAction } from '@kit.ArkUI';
 import {DvrProfile,get_DVR_profile} from '../tools/get_DVR'
 import { TextSystem } from '../view/style';
+import { readPreferences } from '../tools/get_epg';
 
 export const appContext=getContext(this);
 interface ConfigurationPage {
@@ -15,6 +16,13 @@ interface ConfigurationPage {
 }
 interface SelectListItem {
   value: string;
+}
+interface profileList{
+  key:string;
+  val:string;
+}
+interface profileLists{
+  entries:profileList[];
 }
 @Entry
 @Component
@@ -30,6 +38,8 @@ struct Configuration {
     // , {title:'DVR配置',LeiXin:2,placeholder:'DVR配置',id:'DvrConfig'}]//
   ]
   @State DVRConfig:DvrProfile[]=[{name:'默认DVR配置',uuid:'default'}];
+  @State ProfileLists:SelectListItem[]=[];
+  @State SelectProfile_key:string='选择Profile';
   get DVRSelectList(): Array<SelectListItem> {
     return this.DVRConfig.map(p => ({ value: `${p.name}|${p.uuid}` } as SelectListItem));
   }
@@ -48,8 +58,14 @@ struct Configuration {
     } catch (e) {
       console.error('读取配置失败', e);
     }
+    const check=await this.test_server();
+    if (check) {
+      const result = await this.get_profile();
+      this.ProfileLists=result
+    }
   }
   @State testResult : string='';
+
   async test_server() {
     try {
       const pref = await preferences.getPreferences(this.context, this.prefName);
@@ -79,18 +95,42 @@ struct Configuration {
       const ok = response.responseCode >= 200 && response.responseCode < 300;
       this.testResult = ok ? '服务器正常' : `连接失败(${response.responseCode})`;
       promptAction.showToast({ message: this.testResult });
+
       if (ok) {
         console.info('测试成功')
         this.DVRConfig = await get_DVR_profile();
         console.info('测试成功111')
+        return ok;
+      }else {
+        return ok;
       }
     } catch (e) {
       console.error('test_server', e);
       this.testResult = '连接异常'+ (e as Error).message;
       promptAction.showToast({ message: this.testResult });
+      return false;
     }
   };
-
+  async get_profile(): Promise<SelectListItem[]> {
+    const url = await readPreferences('tvheadend_config',`api/profile/list`)
+    console.error("url:",url)
+    const httpRequest = http.createHttp();
+    const response=await httpRequest.request(url,{method:http.RequestMethod.GET})
+    if (response.responseCode===200 && response.result!=null) {
+      const data:profileLists = JSON.parse(response.result as string)
+      console.error("data:",response.result as string)
+      const entries:SelectListItem[] = data.entries.map((item):SelectListItem=>({value:item.val}))
+      return entries
+    }else if (response.responseCode!=200){
+      // 统一返回SelectListItem[]类型
+      const eR:SelectListItem[]=[{value:'配置错误'}]
+      return eR
+    } else {
+      // 统一返回SelectListItem[]类型
+      const eR:SelectListItem[]=[{value:'请点击测试连接按钮设定Profile'}]
+      return eR
+    }
+  }
   // 实时写入
   private async writePref(key: string, value: string | boolean) {
     try {
@@ -172,7 +212,15 @@ struct Configuration {
           };
         }, (item: ConfigurationPage) => item.id);
         ListItem(){
-
+            Select(this.ProfileLists)
+              .value(this.SelectProfile_key)
+              .width('100%')
+              .onSelect((index: number) => {
+                if (index >= 0 && index < this.ProfileLists.length) {
+                  this.SelectProfile_key = this.ProfileLists[index].value;
+                  this.writePref('profile', this.ProfileLists[index].value);
+                }
+              })
         }
       }
       .layoutWeight(1);

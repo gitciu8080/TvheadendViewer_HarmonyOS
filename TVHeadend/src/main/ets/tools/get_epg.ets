@@ -17,6 +17,11 @@ export async function readPreferences(prefName: string, api: string) {
   const url = `${protocol}://${username}:${password}@${server}:${port}/${api}`;
   return url;
 }
+export async function getProfile(){
+  const pref = await preferences.getPreferences(appContext, 'tvheadend_config');
+  const profile = await pref.get('profile', '') as string;
+  return profile;
+}
 async function CheckServer(prefName:string){
   const url = await readPreferences(prefName,'api/serverinfo');
   const httpRequest = http.createHttp();

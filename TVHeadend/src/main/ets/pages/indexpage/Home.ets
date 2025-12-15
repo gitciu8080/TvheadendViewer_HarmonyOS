@@ -6,6 +6,8 @@ import {get_dvr,get_DVR_profile,DvrConfigGridResponse,DvrProfile} from '../../to
 import {DvrListItem,DVRtab} from '../../model/InterFace'
 
 import { getStorage, Storage } from '../../tools/Storage';
+import { Loading } from '../../view/Loading';
+
 class swiperItem{
   title:string;
   image:Resource;
@@ -153,47 +155,79 @@ export struct Home {
 
   
   build() {
-    Scroll(){Column() {
-      Column() {
-        Row() {
-          Swiper() {
-            ForEach(this.swiperList, (item: swiperItem) => {
-              Image(item.image).onClick(item.click)
-            })
-          }
-          .loop(true)
-          .duration(5000)
-          .borderRadius(10)
-          .autoPlay(true)
-          .interval(30 * 1000)
-          .width('100%')
-
-        }.margin({ top: 0, bottom: 10 })
-      }
+    Column(){
       Row(){
-        Column(){
-          TextSystem({text:'已完成的录制列表',level:1,bold:FontWeight.Bold,fontwidth:"90%"}).padding({top:10})
-          Row(){
-            this.DVRBuilder(true,0)
-          }.height(250).margin({top:10,bottom:10})
-        }
-      }.width("100%").backgroundColor($r('app.color.white')).borderRadius(10).margin({ top: 0, bottom: 10 })
-      Row(){
-        Column(){
-          TextSystem({text:'存储信息',level:1,bold:FontWeight.Bold,fontwidth:"90%"}).padding({top:10})
-          Row(){
-            if (this.storageUsed>0){
-              Column(){
-                Row(){
-                  TextSystem({text:`已使用：${this.storageUsed/(1024*1024*1024)^0}GB/剩余：${(this.storageTotal-this.storageUsed)/(1024*1024*1024)^0}GB`,level:4,fontwidth:"80%"})
-                }.width("95%").justifyContent(FlexAlign.SpaceBetween)
-                Storage({Storage_Used:this.storageUsed,Storage_Total:this.storageTotal,StorageValue:this.StorageValue})
+        TextSystem({text:"Tvheadend",level:1,bold:FontWeight.Bold,txtalign:TextAlign.Center}).margin({top:5,bottom:5}).width('100%')
+      }.backgroundColor($r('app.color.white'))
+      Scroll(){
+        Column() {
+          Column() {
+            Row() {
+              Swiper() {
+                ForEach(this.swiperList, (item: swiperItem) => {
+                  Image(item.image).onClick(item.click)
+                })
               }
-            }else {}
-          }.height(100).margin({top:10,bottom:10})
-        }.width("100%")
-      }.width("100%").backgroundColor($r('app.color.white')).borderRadius(10).margin({ top: 0, bottom: 10 })
-    }.width("100%").justifyContent(FlexAlign.Start).height('100%')}
+              .loop(true)
+              .duration(5000)
+              .borderRadius(10)
+              .autoPlay(true)
+              .interval(30 * 1000)
+              .width('100%')
+
+            }.margin({ top: 0, bottom: 10 })
+          }
+          Row(){
+            Column(){
+              TextSystem({text:'已完成的录制列表',level:1,bold:FontWeight.Bold,fontwidth:"90%"}).padding({top:10})
+              if (this.DVR.length>0){
+                Row(){
+                  this.DVRBuilder(true,0)
+                }.height(250).margin({top:10,bottom:10})
+              }else {
+                Row(){
+                  Loading({countdown:5})
+                }.height(250).margin({top:10,bottom:10})
+              }
+
+            }
+          }.width("100%").backgroundColor($r('app.color.white')).borderRadius(10).margin({ top: 0, bottom: 10 })
+          if (this.storageUsed>0) {
+            Row() {
+              Column() {
+                TextSystem({
+                  text: '存储信息',
+                  level: 1,
+                  bold: FontWeight.Bold,
+                  fontwidth: "90%"
+                }).padding({ top: 10 })
+                Row() {
+                  if (this.storageUsed > 0) {
+                    Column() {
+                      Row() {
+                        TextSystem({
+                          text: `已使用：${this.storageUsed / (1024 * 1024 * 1024) ^ 0}GB/剩余：${(this.storageTotal -
+                          this.storageUsed) / (1024 * 1024 * 1024) ^ 0}GB`,
+                          level: 4,
+                          fontwidth: "80%"
+                        })
+                      }.width("95%").justifyContent(FlexAlign.SpaceBetween)
+
+                      Storage({
+                        Storage_Used: this.storageUsed,
+                        Storage_Total: this.storageTotal,
+                        StorageValue: this.StorageValue
+                      })
+                    }
+                  } else {
+                  }
+                }.height(100).margin({ top: 10, bottom: 10 })
+              }.width("100%")
+            }.width("100%").backgroundColor($r('app.color.white')).borderRadius(10).margin({ top: 0, bottom: 10 })
+          }else {}
+        }.width("100%").justifyContent(FlexAlign.Start).height('100%')}
+    }
+
 
   }
 }

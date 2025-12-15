@@ -69,10 +69,15 @@ export struct DVRBtnBuilder {
   build() {
     Row(){
       BtnBuilderNormal({text:$r("app.string.CopyLink"),click:this.copy_click})
-      // Text('|').fontColor($r('app.color.gray')).margin(10)
-      // BtnBuilderNormal({text:$r("app.string.Play"),click:this.play_click})
-      // Text('|').fontColor($r('app.color.gray')).margin(10)
-      // DelBtnBuilder({click:this.del})
+      if (this.play_click===null){
+        Text('|').fontColor($r('app.color.gray')).margin(10)
+        BtnBuilderNormal({text:$r("app.string.Play"),click:this.play_click})
+      }else {}
+      if (this.del===null){
+        Text('|').fontColor($r('app.color.gray')).margin(10)
+        DelBtnBuilder({click:this.del})
+      }else {}
+
     }
   }
 }

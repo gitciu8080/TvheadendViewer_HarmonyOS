@@ -1,8 +1,10 @@
 import { DVRBtnBuilder } from "../../tools/ButtomBuilder";
-import { getChannel, readPreferences } from "../../tools/get_epg";
+import { getChannel, getProfile, readPreferences } from "../../tools/get_epg";
 import { TitleStyle } from "../../view/style";
 import pasteboard from '@ohos.pasteboard';
 import promptAction from '@ohos.promptAction';
+import { Loading } from "../../view/Loading";
+import { preferences } from "@kit.ArkData";
 
 interface ChannelListResponse {
   entries: Channel[];
@@ -23,8 +25,10 @@ export struct TV{
 
   }
   private async  copyLink(url:string,title:string): Promise<void>{
+
     try {
-      const link=await readPreferences('tvheadend_config',`play/ticket/stream/channel/${url}?title=${title}`)
+      const profile= await getProfile()
+      const link=await readPreferences('tvheadend_config',`play/ticket/stream/channel/${url}?profile=${profile}`)
       const pb = pasteboard.getSystemPasteboard();
       const data = pasteboard.createData(pasteboard.MIMETYPE_TEXT_PLAIN, link);
       await pb.setData(data);
@@ -66,7 +70,12 @@ export struct TV{
 }
   build() {
     Column(){
-      this.ChannelListItem()
-    }
+      if (this.channelList.length>0){
+        this.ChannelListItem()
+      }else {
+        Loading({countdown:5})
+      }
+
+    }.height('100%')
   }
 }

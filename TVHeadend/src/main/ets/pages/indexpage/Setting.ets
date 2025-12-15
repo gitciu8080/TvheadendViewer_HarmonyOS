@@ -32,8 +32,8 @@ export struct setting{
             Column() {
               Row(){
                 Image(item.icon).height('80px').fillColor($r('app.color.black')).margin({top:12,bottom:12})
-                Text(item.name).fontSize(16).fontWeight(FontWeight.Medium).fontColor($r('app.color.black')).textAlign(TextAlign.End).width('80%')
-              }.backgroundColor($r('app.color.white')).borderRadius(15).width("100%").padding({left:12,right:12}).onClick(()=>{
+                Text(item.name).fontSize(16).fontWeight(FontWeight.Medium).fontColor($r('app.color.black')).textAlign(TextAlign.End)
+              }.backgroundColor($r('app.color.white')).justifyContent(FlexAlign.SpaceBetween).borderRadius(15).width("100%").padding({left:12,right:12}).onClick(()=>{
                 router.pushUrl({url:`pages/${item.page}`})
               })
             }.width("100%").justifyContent(FlexAlign.Center)
