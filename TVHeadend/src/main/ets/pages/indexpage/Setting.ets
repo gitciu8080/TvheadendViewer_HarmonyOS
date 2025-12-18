@@ -1,5 +1,7 @@
 import {Settings} from '../../model/InterFace'
 import { router } from '@kit.ArkUI';
+import { TextSystem } from '../../view/style';
+
 @Entry
 @Component
 export struct setting{
@@ -13,14 +15,17 @@ export struct setting{
   }
   private settinglist:Array<object>=[
     new Settings('TVH设置', $r('app.media.ic_public_settings'), 'TVHSConfig'),
-    new Settings('关于我', $r('app.media.ic_public_settings'), 'ForwardME'),
-    new Settings('未来更新计划', $r('app.media.ic_public_settings'), 'UpdateInFuture'),
+    new Settings('关于我', $r('app.media.ic_public_detail'), 'ForwardME'),
+    // new Settings('未来更新计划', $r('app.media.ic_public_detail'), 'UpdateInFuture'),
     // ,
     // new Settings("播放器设置", $r('app.media.ic_public_settings'), 'IJKConfig')
 
   ]
   build() {
     Column(){
+      Row(){
+        TextSystem({text:$r('app.string.EPG'),level:1,bold:FontWeight.Bold,txtalign:TextAlign.Center}).margin({top:5,bottom:5}).width('100%')
+      }.backgroundColor($r('app.color.white'))
       Row(){
         Image($r('app.media.tvh')).width('20%')
         Text('TvHeadEnd').fontSize(30).fontWeight(FontWeight.Bold).fontColor($r('app.color.black')).textAlign(TextAlign.End).width('80%')

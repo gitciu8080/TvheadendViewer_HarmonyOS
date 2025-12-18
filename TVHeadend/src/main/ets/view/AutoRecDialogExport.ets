@@ -1,4 +1,4 @@
-import {SimpleDialog,AdvancedDialog} from "./AutoRecDialog"
+import {SimpleDialog,AdvancedDialog} from "./Dialog"
 import { LengthMetrics, LengthUnit, promptAction } from '@kit.ArkUI';
 import { BtnBuilderCancel, BtnBuilderNormal,EPGBtnBuilder } from '../tools/ButtomBuilder';
 

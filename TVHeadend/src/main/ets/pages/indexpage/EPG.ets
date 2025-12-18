@@ -136,7 +136,7 @@ export struct EPG{
                             Column() {
                               Row(){TitleStyle({text:epgItem.title,level:1})
                                 if (epgItem.Multi_language===true && epgItem.PG===true) {
-                                  TitleStyle({text:`${$r('app.string.Multilingual')}${$r('app.string.PG')}`,level:4})
+                                  TitleStyle({text:$r('app.string.Multilingual_PG'),level:4})
                                 }else if (epgItem.Multi_language===true){
                                   TitleStyle({text:$r('app.string.Multilingual'),level:4})
                                 }if (epgItem.PG===true){
@@ -157,7 +157,7 @@ export struct EPG{
                               if (epgItem.title==='暂无节目信息') {
 
                               }else {
-                                CustomDialogUser({eventId:epgItem.event_id,title:epgItem.title,Manual_Rec:async () => {Rec_TV(epgItem.event_id,epgItem.title)},Book:this.qidai})
+                                CustomDialogUser({eventId:epgItem.event_id,title:epgItem.title,Manual_Rec:async () => {Rec_TV(epgItem.event_id,epgItem.title)}})
                               }
                             }
                             .padding(12)

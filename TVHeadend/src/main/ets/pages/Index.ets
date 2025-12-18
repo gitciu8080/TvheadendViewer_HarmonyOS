@@ -8,15 +8,26 @@ import { TextSystem } from "../view/style";
 @Entry
 @Component
 struct MainPage {
-  @Provide currentTabIndex: number = 0;
-  @Builder tabbar_text(text: string, isActive: boolean) {
-    Text(text)
-      .fontWeight(isActive ? FontWeight.Bold : FontWeight.Normal)
-      .fontColor(isActive ? $r('app.color.text_hint') : $r('app.color.text_hint'))
-      .textAlign(TextAlign.Center)
-      .backgroundColor(isActive ? $r('app.color.primary_light') : Color.Transparent)
-      .borderRadius(5)
-      .padding({ left: 10, right: 10, top: 5, bottom: 5 })
+  @Provide currentTabIndex: number = 2;
+  @Builder tabbar_text(text: string, index:number) {
+    if (index === this.currentTabIndex) {
+      Text(text)
+        .fontWeight(FontWeight.Bold)
+        .fontColor($r('app.color.primary_main'))
+        .textAlign(TextAlign.Center)
+        .backgroundColor(Color.Transparent)
+        .borderRadius(5)
+        .padding({ left: 10, right: 10, top: 5, bottom: 5 })
+    } else {
+      Text(text)
+        .fontWeight(FontWeight.Normal)
+        .fontColor($r('app.color.black'))
+        .textAlign(TextAlign.Center)
+        .backgroundColor(Color.Transparent)
+        .borderRadius(5)
+        .padding({ left: 10, right: 10, top: 5, bottom: 5 })
+    }
+
   }
 
   build() {
@@ -24,19 +35,19 @@ struct MainPage {
         Tabs({barPosition:BarPosition.End,index:2}){
           TabContent(){
             EPG().backgroundColor($r('app.color.background_sec')).width("100%")
-          }.tabBar('EPG')
+          }.tabBar(this.tabbar_text('节目表', 0))
           TabContent(){
             DVR().backgroundColor($r('app.color.background_sec')).width("100%")
-          }.tabBar('DVR')
+          }.tabBar(this.tabbar_text('录像机', 1))
           TabContent(){
             Home().backgroundColor($r('app.color.background_sec')).width("100%")
-          }.tabBar('首页')
+          }.tabBar(this.tabbar_text('主页', 2))
           TabContent(){
               TV().backgroundColor($r('app.color.background_sec')).width("100%")
-          }.tabBar('看电视')
+          }.tabBar(this.tabbar_text('电视', 3))
           TabContent(){
             setting().backgroundColor($r('app.color.background_sec')).width("100%")
-          }.tabBar('设置')
+          }.tabBar(this.tabbar_text('设置', 4))
         }.animationDuration(300).onChange((idx: number) => this.currentTabIndex = idx)
       }.height('100%')
     }

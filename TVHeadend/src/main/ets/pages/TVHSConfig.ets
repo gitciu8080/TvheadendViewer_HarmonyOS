@@ -39,7 +39,7 @@ struct Configuration {
   ]
   @State DVRConfig:DvrProfile[]=[{name:'默认DVR配置',uuid:'default'}];
   @State ProfileLists:SelectListItem[]=[];
-  @State SelectProfile_key:string='选择Profile';
+  @State SelectProfile_key:string='';
   get DVRSelectList(): Array<SelectListItem> {
     return this.DVRConfig.map(p => ({ value: `${p.name}|${p.uuid}` } as SelectListItem));
   }
@@ -59,6 +59,7 @@ struct Configuration {
       console.error('读取配置失败', e);
     }
     const check=await this.test_server();
+    this.checkProfile();
     if (check) {
       const result = await this.get_profile();
       this.ProfileLists=result
@@ -136,9 +137,20 @@ struct Configuration {
     try {
       const pref = await preferences.getPreferences(this.context, this.prefName);
       await pref.put(key, value);
+      console.log('写入配置成功', key, value)
       await pref.flush();          // 立即落盘
     } catch (e) {
       console.error('写入配置失败', e);
+    }
+  }
+  async checkProfile(){
+    if (await this.get_profile()===null){
+      this.SelectProfile_key='选择Profile'
+    }else {
+      const pref = await preferences.getPreferences(this.context, this.prefName);
+      const profile=await pref.get('profile','')as string
+      console.log("duqu",profile)
+      this.SelectProfile_key=profile
     }
   }
   build() {

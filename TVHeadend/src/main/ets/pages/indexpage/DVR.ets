@@ -6,6 +6,8 @@ import { readPreferences } from '../../tools/get_epg';
 import pasteboard from '@ohos.pasteboard';
 import promptAction from '@ohos.promptAction';
 import { Loading } from '../../view/Loading';
+import { common, Want } from "@kit.AbilityKit";
+import { BusinessError } from "@kit.BasicServicesKit";
 
 @Entry
 @Component
@@ -38,6 +40,29 @@ export struct DVR{
       this.loadDVR();              // 相当于 onPageShow
     }
   }
+  jumpToApp(bundleName: string) {
+    try {
+      // 创建Want对象，指定目标应用的BundleName
+      const context=getContext(this) as common.UIAbilityContext
+      const store:Want={
+        uri:"store://appgallery.huawei.com/app/detail?id=com.aloereed.aloeplayer"
+      }
+      let want: Want = {
+        bundleName: bundleName,
+        abilityName: 'EntryAbility'
+      };
+
+      // 启动目标应用
+      context.startAbility(want).then(() => {
+        console.log('Successfully jumped to app: ' + bundleName);
+      }).catch((err: BusinessError) => {
+        context.startAbility(store)
+        console.error('Failed to jump to app: ' + bundleName + ', error: ' + err);
+      });
+    } catch (error) {
+      console.error('Exception occurred while jumping to app: ' + bundleName + ', error: ' + error);
+    }
+  }
   private async loadDVR(){
     try {
       const dvrList_finished = await get_dvr('_finished');
@@ -60,6 +85,9 @@ export struct DVR{
       title:'正在开发，敬请期待',
       message: '正在开发，敬请期待'
     })
+  }
+  async Delete_Rec(uuid:string){
+
   }
 
   async RefreshDVR(mode:number){
@@ -89,7 +117,7 @@ export struct DVR{
                   Row(){TitleStyle({text:item.disp_extratext,level:3})}.width('100%')
                   Row(){
                     if (copy===true) {
-                      DVRBtnBuilder({copy_click:()=>this.copyLink(item.url,item.title.chi)})
+                      DVRBtnBuilder({copy_click:()=>this.copyLink(item.url,item.title.chi),play_click:()=>{this.copyLink(item.url,item.title.chi);this.jumpToApp('com.aloereed.aloeplayer')},del:()=>{this.Delete_Rec(item.uuid)}})
                     }else {}
                   }.width('100%').margin({top:5}).justifyContent(FlexAlign.SpaceBetween)
                 }.width('95%').padding(10)
@@ -129,7 +157,7 @@ export struct DVR{
                   Row(){TitleStyle({text:item.disp_extratext,level:3})}.width('100%')
                   Row(){
                     if (copy===true) {
-                      DVRBtnBuilder({copy_click:()=>this.copyLink(item.url,item.title.chi)})
+                      DVRBtnBuilder({copy_bool:false,play_bool:false,del:()=>{this.Delete_Rec(item.uuid)}})
                     }else {}
                   }.width('100%').margin({top:5}).justifyContent(FlexAlign.SpaceBetween)
                 }.width('95%').padding(10)
@@ -178,7 +206,7 @@ export struct DVR{
             }.tabBar(this.channel_bar('预约', 1))
 
             TabContent() {
-              this.DVRBuilder(false, 2)
+              this.DVRBuilder(true, 2)
             }.tabBar(this.channel_bar('错误', 2))
 
             TabContent() {

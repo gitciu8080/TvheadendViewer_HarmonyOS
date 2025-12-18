@@ -1,6 +1,6 @@
 {
   "app": {
-    "bundleName": "com.TV.tvheadview",
+    "bundleName": "com.tvheadend.viewer",
     "vendor": "example",
     "versionCode": 1000000,
     "versionName": "1.0.0",

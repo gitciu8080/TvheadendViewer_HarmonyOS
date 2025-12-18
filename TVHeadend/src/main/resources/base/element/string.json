@@ -119,6 +119,10 @@
     {
       "name": "forwardME",
       "value": "关于我的"
+    },
+    {
+      "name": "Multilingual_PG",
+      "value": "多语言_PG"
     }
   ]
 }

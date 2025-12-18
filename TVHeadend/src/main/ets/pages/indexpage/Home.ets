@@ -210,7 +210,7 @@ export struct Home {
                           this.storageUsed) / (1024 * 1024 * 1024) ^ 0}GB`,
                           level: 4,
                           fontwidth: "80%"
-                        })
+                        }).margin({bottom:5})
                       }.width("95%").justifyContent(FlexAlign.SpaceBetween)
 
                       Storage({
@@ -225,7 +225,7 @@ export struct Home {
               }.width("100%")
             }.width("100%").backgroundColor($r('app.color.white')).borderRadius(10).margin({ top: 0, bottom: 10 })
           }else {}
-        }.width("100%").justifyContent(FlexAlign.Start).height('100%')}
+        }.width("100%").justifyContent(FlexAlign.Start)}.height('100%')
     }
 
 

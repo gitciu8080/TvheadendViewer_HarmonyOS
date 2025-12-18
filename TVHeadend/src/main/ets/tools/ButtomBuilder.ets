@@ -66,17 +66,42 @@ export struct DVRBtnBuilder {
   copy_click:() => void = () => {};
   play_click:() => void = () => {};
   del:() => void = () => {};
+  @State copy_bool:boolean=true;
+  @State del_bool:boolean=true;
+  @State play_bool:boolean=true;
   build() {
     Row(){
-      BtnBuilderNormal({text:$r("app.string.CopyLink"),click:this.copy_click})
-      if (this.play_click===null){
+      if (this.copy_bool){
+        BtnBuilderNormal({text:$r("app.string.CopyLink"),click:this.copy_click})
+      }
+      if (this.play_bool){
         Text('|').fontColor($r('app.color.gray')).margin(10)
         BtnBuilderNormal({text:$r("app.string.Play"),click:this.play_click})
       }else {}
-      if (this.del===null){
+      if (this.del_bool===true && this.copy_bool===true){
         Text('|').fontColor($r('app.color.gray')).margin(10)
+      }else {}
+      if (this.del_bool){
+
         DelBtnBuilder({click:this.del})
       }else {}
+
+    }
+  }
+}
+@Component
+export struct TVBtnBuilder {
+  copy_click:() => void = () => {};
+  play_click:() => void = () => {};
+  del:() => void = () => {};
+  build() {
+    Row(){
+      BtnBuilderNormal({text:$r("app.string.CopyLink"),click:this.copy_click})
+      if (this.play_click!==(()=>{})){
+        Text('|').fontColor($r('app.color.gray')).margin(10)
+        BtnBuilderNormal({text:$r("app.string.Play"),click:this.play_click})
+      }else {}
+
 
     }
   }
@@ -93,8 +118,8 @@ export struct EPGBtnBuilder{
       BtnBuilderNormal({text:$r("app.string.AutoRec"),click:this.Auto_Rec})
       Text('|').fontColor($r('app.color.gray')).margin(10)
       BtnBuilderNormal({text:$r("app.string.Rec"),click:this.Manual_Rec})
-      Text('|').fontColor($r('app.color.gray')).margin(10)
-      BtnBuilderNormal({text:$r("app.string.Book"),click:this.Book})
+      // Text('|').fontColor($r('app.color.gray')).margin(10)
+      // BtnBuilderNormal({text:$r("app.string.Book"),click:this.Book})
     }.margin({top:12}).width('100%').justifyContent(FlexAlign.End)
   }
 }
