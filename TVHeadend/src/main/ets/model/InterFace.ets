@@ -97,6 +97,17 @@ export class Settings {
     this.page = page;
   }
 }
+export class EPGSearch {
+  name: string;
+  icon: Resource;
+  link: string;
+
+  constructor(name: string, icon: Resource, link: string) {
+    this.name = name;
+    this.icon = icon;
+    this.link = link;
+  }
+}
 
 export class DVRtab{
   title:string;

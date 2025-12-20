@@ -16,6 +16,8 @@ export struct setting{
   private settinglist:Array<object>=[
     new Settings('TVH设置', $r('app.media.ic_public_settings'), 'TVHSConfig'),
     new Settings('关于我', $r('app.media.ic_public_detail'), 'ForwardME'),
+    new Settings('后端搭建教程', $r('app.media.tvhlogo'), 'BuildServer'),
+    new Settings('第一次使用教程', $r('app.media.ic_public_detail'), 'One_USE'),
     // new Settings('未来更新计划', $r('app.media.ic_public_detail'), 'UpdateInFuture'),
     // ,
     // new Settings("播放器设置", $r('app.media.ic_public_settings'), 'IJKConfig')
@@ -24,10 +26,10 @@ export struct setting{
   build() {
     Column(){
       Row(){
-        TextSystem({text:$r('app.string.EPG'),level:1,bold:FontWeight.Bold,txtalign:TextAlign.Center}).margin({top:5,bottom:5}).width('100%')
+        TextSystem({text:$r('app.string.setting'),level:1,bold:FontWeight.Bold,txtalign:TextAlign.Center}).margin({top:5,bottom:5}).width('100%')
       }.backgroundColor($r('app.color.white'))
       Row(){
-        Image($r('app.media.tvh')).width('20%')
+        Image($r("app.media.tvhlogo")).width('20%')
         Text('TvHeadEnd').fontSize(30).fontWeight(FontWeight.Bold).fontColor($r('app.color.black')).textAlign(TextAlign.End).width('80%')
 
       }.backgroundColor($r('app.color.white')).padding({left:12,right:12,top:12,bottom:12}).margin({top:12,bottom:24}).borderRadius(15).width("95%")

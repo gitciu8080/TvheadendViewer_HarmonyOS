@@ -1,13 +1,20 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
+import { pushService } from '@kit.PushKit';
 
 const DOMAIN = 0x0000;
 
 export default class TVHeadendAbility extends UIAbility {
-  onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+  async onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): Promise<void> {
     this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
     hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onCreate');
+    try {
+      const pushToken:string=await pushService.getToken()
+      hilog.info(0x0000, 'testTag', 'pushToken:%{public}s', pushToken)
+    }catch (e){
+      hilog.error(DOMAIN, 'testTag', 'Failed to get pushToken. Cause: %{public}s', JSON.stringify(e));
+    }
   }
 
   onDestroy(): void {
@@ -16,6 +23,7 @@ export default class TVHeadendAbility extends UIAbility {
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
     // Main window is created, set main page for this ability
+
     hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
 
     windowStage.loadContent('pages/Index', (err) => {

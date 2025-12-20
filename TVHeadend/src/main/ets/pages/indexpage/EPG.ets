@@ -4,6 +4,7 @@ import {CustomDialogUser}from "../../view/AutoRecDialogExport"
 import { TextSystem, TitleStyle} from "../../view/style"
 import {Rec_TV}from "../../tools/buttom_Action"
 import { Loading } from '../../view/Loading';
+import router from '@ohos.router';
 
 const EMPTY_EPG: EpgGroup[] = [
   {
@@ -166,7 +167,10 @@ export struct EPG{
                             .borderRadius(10)
                             .margin({top:5})
                             .width('95%');
-                          }.width('100%').margin({top:5,bottom:5})})
+                          }.onClick(()=>{
+                            if (epgItem.title!=='暂无节目信息') {
+                              router.pushUrl({url:"pages/indexpage/EPGD",params:{title:epgItem.title,start:epgItem.start,stop:epgItem.stop,event_id:epgItem.event_id,summary:epgItem.summary}})
+                            }else {} }).width('100%').margin({top:5,bottom:5})})
                       }
 
                     })

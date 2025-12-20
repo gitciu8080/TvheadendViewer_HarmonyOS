@@ -1,4 +1,4 @@
-import { Content, LengthMetrics, LengthUnit, promptAction } from '@kit.ArkUI';
+import { Content, LengthMetrics, LengthUnit, promptAction, router } from '@kit.ArkUI';
 import "../view/style"
 import "../tools/ButtomBuilder"
 import { BtnBuilderCancel, BtnBuilderNormal } from '../tools/ButtomBuilder';
@@ -54,9 +54,13 @@ export struct SimpleDialog {
   controller?: CustomDialogController
   eventId:number=0;
   title:string='';
+  back:boolean=false;
   async AutoRec(){
     Auto_Rec(this.eventId,this.title)
     await this.controller!.close()
+    if (this.back) {
+      router.back()
+    }else {}
   }
   @Builder
   diaSelectBuilder(Accept: () => void){

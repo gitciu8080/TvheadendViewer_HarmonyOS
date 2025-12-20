@@ -7,6 +7,7 @@ import pasteboard from '@ohos.pasteboard';
 import promptAction from '@ohos.promptAction';
 import { Loading } from '../../view/Loading';
 import { common, Want } from "@kit.AbilityKit";
+import {http} from '@kit.NetworkKit'
 import { BusinessError } from "@kit.BasicServicesKit";
 
 @Entry
@@ -80,14 +81,19 @@ export struct DVR{
     }
   }
 
-  async  qidai(){
-    this.getUIContext().showAlertDialog({
-      title:'正在开发，敬请期待',
-      message: '正在开发，敬请期待'
-    })
-  }
-  async Delete_Rec(uuid:string){
-
+  async Delete_Rec(uuid:string,mode:number){
+    const url=await readPreferences('tvheadend_config',`api/dvr/entry/remove?uuid=${uuid}`)
+    const httpReq=http.createHttp();
+    try {
+      const response = await httpReq.request(url,{method: http.RequestMethod.GET})
+      if (response.responseCode===200){
+        this.RefreshDVR(mode)
+        promptAction.showToast({ message: '删除成功', duration: 1500 });
+      }
+    }catch (e) {
+      promptAction.showToast({ message: '删除失败', duration: 1500 });
+      console.error('删除DVR列表失败:', e);
+    }
   }
 
   async RefreshDVR(mode:number){
@@ -117,7 +123,7 @@ export struct DVR{
                   Row(){TitleStyle({text:item.disp_extratext,level:3})}.width('100%')
                   Row(){
                     if (copy===true) {
-                      DVRBtnBuilder({copy_click:()=>this.copyLink(item.url,item.title.chi),play_click:()=>{this.copyLink(item.url,item.title.chi);this.jumpToApp('com.aloereed.aloeplayer')},del:()=>{this.Delete_Rec(item.uuid)}})
+                      DVRBtnBuilder({copy_click:()=>this.copyLink(item.url,item.title.chi),play_click:()=>{this.copyLink(item.url,item.title.chi);this.jumpToApp('com.aloereed.aloeplayer')},del:()=>{this.Delete_Rec(item.uuid,0)}})
                     }else {}
                   }.width('100%').margin({top:5}).justifyContent(FlexAlign.SpaceBetween)
                 }.width('95%').padding(10)
@@ -157,7 +163,7 @@ export struct DVR{
                   Row(){TitleStyle({text:item.disp_extratext,level:3})}.width('100%')
                   Row(){
                     if (copy===true) {
-                      DVRBtnBuilder({copy_bool:false,play_bool:false,del:()=>{this.Delete_Rec(item.uuid)}})
+                      DVRBtnBuilder({copy_bool:false,play_bool:false,del:()=>{this.Delete_Rec(item.uuid,2)}})
                     }else {}
                   }.width('100%').margin({top:5}).justifyContent(FlexAlign.SpaceBetween)
                 }.width('95%').padding(10)

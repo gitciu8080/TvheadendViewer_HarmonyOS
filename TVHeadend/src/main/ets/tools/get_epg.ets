@@ -112,14 +112,14 @@ export async function getEPG(prefname:string,channelID:string){
       const hasPG = item.title.includes('[PG]');
       // const hasMultiLang = item.title.includes('[*/*]');
       const hasMultiLang = item.title.includes('[*/*]') || /\[.\/.\]/.test(item.title);
-
+      const summary=item.description || item.subtitle;
       return{
         event_id:item.eventId,
         id: item.channelUuid,
         title: item.title.replace(/\[PG\]|\[.*\/.*\]/g,'').trim(),
         start: item.start,
         stop: item.stop,
-        summary: item.subtitle,
+        summary:summary,
         progress: Math.max(0, Math.min(100, ((now - item.start) / (item.stop - item.start)) * 100)),
         PG: hasPG,
         Multi_language: hasMultiLang

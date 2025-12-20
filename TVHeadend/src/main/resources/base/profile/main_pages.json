@@ -8,6 +8,8 @@
     "tools/Storage",
     "pages/ForwardTVH",
     "pages/UpdateInFuture",
-    "pages/Player"
+    "pages/Player",
+    "pages/indexpage/EPGD",
+    "pages/BuildServer"
   ]
 }

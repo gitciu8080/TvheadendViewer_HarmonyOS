@@ -10,6 +10,7 @@ export struct CustomDialogUser {
   eventId:number=0;
   title:string='';
   Auto_Rec:() => void = () => {};
+  Auto_Rec_Back:boolean=false;
   Manual_Rec:() => void = () => {};
   Book:() => void = () => {};
   /**
@@ -22,7 +23,7 @@ export struct CustomDialogUser {
         if (this.dialogControllerTwo != null) {
           this.dialogControllerTwo.open()
         }
-      },title:this.title,eventId:this.eventId
+      },title:this.title,eventId:this.eventId,back:this.Auto_Rec_Back
     }),
     cancel: this.exitApp,
     autoCancel: false,

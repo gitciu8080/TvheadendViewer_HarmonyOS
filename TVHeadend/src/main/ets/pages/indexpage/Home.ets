@@ -58,7 +58,7 @@ export struct Home {
   
   private swiperList:Array<object>=[
       new swiperItem('',$r('app.media.Swiper1'),()=>{router.pushUrl({url:`pages/One_USE`})}),
-      new swiperItem('',$r('app.media.Swiper1'),()=>{router.pushUrl({url:`pages/One_USE`})})
+      new swiperItem('',$r('app.media.Swiper2'),()=>{router.pushUrl({url:`pages/BuildServer`})})
   ]
 
 

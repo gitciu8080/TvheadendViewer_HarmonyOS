@@ -3,7 +3,7 @@ import pasteboard from '@ohos.pasteboard';
 
 @Entry
 @Component
-struct  OneUseMD {
+struct BuildServer {
   // @State message: string = 'Hello World';
   markdownController:MarkdownController=new MarkdownController();
   aboutToAppear(): void {
@@ -17,7 +17,7 @@ struct  OneUseMD {
   build() {
     Scroll(){
       Column(){
-        Markdown({mode:"rawfile",context:getContext(),rawfilePath:"OneUse.md",controller:this.markdownController,
+        Markdown({mode:"rawfile",context:getContext(),rawfilePath:"BuildServer.md",controller:this.markdownController,
           callback: {                 // callback 可省略
             complete: () => {
               console.log("Markdown component load success.")

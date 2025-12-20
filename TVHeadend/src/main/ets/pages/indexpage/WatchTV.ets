@@ -102,7 +102,7 @@ export struct TV{
     Column(){
       Row(){
 
-        TextSystem({text:$r('app.string.EPG'),level:1,bold:FontWeight.Bold,txtalign:TextAlign.Center}).margin({top:5,bottom:5}).width('100%')
+        TextSystem({text:'电视台列表',level:1,bold:FontWeight.Bold,txtalign:TextAlign.Center}).margin({top:5,bottom:5}).width('100%')
       }.backgroundColor($r('app.color.white'))
       if (this.channelList.length>0){
         this.ChannelListItem()
